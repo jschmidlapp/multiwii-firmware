@@ -2038,4 +2038,16 @@
   #error "you use one feature that is no longer supported or has undergone a name change"
 #endif
 
+#ifndef DEFAULT_RC_RATE_8
+#define DEFAULT_RC_RATE_8 90
+#endif
+
+#ifndef DEFAULT_RC_EXPO_8
+#define DEFAULT_RX_EXPO_8 65
+#endif
+
+#ifndef DEFAULT_YAW_RATE
+#define DEFAULT_YAW_RATE 0
+#endif
+
 #endif /* DEF_H_ */
