@@ -135,6 +135,13 @@
   #error "*** this test is not yet defined"
 #endif
 
+#if defined(HK_MICRO_MWC)
+  #define MPU6050
+  #define ACC_ORIENTATION(X, Y, Z)  {imu.accADC[ROLL]  = -X; imu.accADC[PITCH]  = -Y; imu.accADC[YAW]  =  Z;}
+  #define GYRO_ORIENTATION(X, Y, Z) {imu.gyroADC[ROLL] =  Y; imu.gyroADC[PITCH] = -X; imu.gyroADC[YAW] = -Z;}
+  #define RC_CHANS 6 // Built in 6-channel DSM receiver
+  #undef ESC_CALIB_CANNOT_FLY // Brushed motors so no ESCs to calibrate
+#endif
 
 /**************************************************************************************/
 /***************             Proc specific definitions             ********************/
@@ -1862,7 +1869,9 @@
 #elif defined(SPEKTRUM) || defined(SERIAL_SUM_PPM)
   #define RC_CHANS 12
 #else
-  #define RC_CHANS 8
+  #ifndef RC_CHANS
+    #define RC_CHANS 8
+  #endif
 #endif
 
 #if !(defined(DISPLAY_2LINES)) && !(defined(DISPLAY_MULTILINE))
